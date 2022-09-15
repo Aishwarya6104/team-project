@@ -162,3 +162,9 @@ cython_debug/
 #.idea/
 
 
+/management_comp.py
+/.idea/modules.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/misc.xml
+/.idea/vcs.xml
+/.idea/team-project.iml

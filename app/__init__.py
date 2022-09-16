@@ -14,3 +14,5 @@ def main(request: func.HttpRequest):
             name = request.get_json()['name']
         except (ValueError, KeyError):
             return func.HttpResponse("Wrong json")
+
+        return func.HttpResponse(f'Hello, {name}')

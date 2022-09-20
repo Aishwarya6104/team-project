@@ -16,6 +16,15 @@ def get_message():
     return jsonify(data)
 
 
+class Keychain:
+    text: str
+    logo: str
+
+    def __init__(self, text: str, logo: str):
+        self.text = text
+        self.logo = logo
+
+
 class User:
     surname: str
     name: str
@@ -26,10 +35,8 @@ class User:
     role: str
     newsletter: bool
 
-    # class keychain:
-
     def __init__(self, surname: str, name: str, email: str, company: str, department: str, phone: str, role: str,
-                 newsletter: bool):
+                 newsletter: bool, text: str, logo: str):
         self.surname = surname
         self.name = name
         self.email = email
@@ -38,6 +45,7 @@ class User:
         self.phone = phone
         self.role = role
         self.newsletter = newsletter
+        self.obj_keychain = Keychain(text, logo)
 
 
 users = []
@@ -48,19 +56,20 @@ def add_value():
     if request.is_json:
         new_data = request.get_json()
         user = User(new_data['surname'], new_data['name'], new_data['email'], new_data['company'],
-                    new_data['department'], new_data['phone'], new_data['role'], new_data['newsletter'])
+                    new_data['department'], new_data['phone'], new_data['role'], new_data['newsletter'],
+                    new_data['text'], new_data['logo'])
         users.append(user)
         print([user.name for user in users])
         # data.append(users)
         # logging.debug(users)
-        return jsonify(new_data, 201)
+        return jsonify(new_data), 201
     return {"error": "Request must be JSON"}, 415
 
 
 @app.route('/delete/<name>', methods=['DELETE'])
 def delete_value(name):
-    u_1 = User("Britt", "Max", "m.britt@mail.com", "XYZ", "Operations", "+4915192345678", "HR", True)
-    u_2 = User("Hannes", "Patrick", "p.hannes@mail.com", "XYZ", "Operations", "+4915192345779", "HR", False)
+    u_1 = User("Britt", "Max", "m.britt@mail.com", "XYZ", "Operations", "+4915192345678", "HR", True, "something", "azure")
+    u_2 = User("Hannes", "Patrick", "p.hannes@mail.com", "XYZ", "Operations", "+4915192345779", "HR", False, "something", "terraform")
     users.append(u_1)
     users.append(u_2)
     print(len(users))

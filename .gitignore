@@ -168,3 +168,5 @@ cython_debug/
 /.idea/misc.xml
 /.idea/vcs.xml
 /.idea/team-project.iml
+
+.python_packages
